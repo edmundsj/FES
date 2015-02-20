@@ -38,8 +38,8 @@ const int sensorPin = A0;
 
 int sensorValue = 0;
 
-int isi_ms = 100;           // milliseconds between end of negative on and beginning of positive on
-int freq = 100;              // not currently used variable
+int freq = 10;              // used to determine how fast we will be sending our signal
+int isi_ms = 1000/freq;           // milliseconds between end of negative on and beginning of positive on
 int pulse_width_us = 80;    // microseconds that positive pulse width should last
 int trough_width_us = 300;    // microse
 
