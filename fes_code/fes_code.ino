@@ -84,8 +84,8 @@ void checkInput() {
 
 void loop() {
   
-  positive_on();
-  positive_off();
+  pulse_on();
+  pulse_off();
   
    //the below is just sample code of how to write a value to the digiPot
   checkInput();
