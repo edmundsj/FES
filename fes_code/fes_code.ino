@@ -32,7 +32,7 @@
 
 
 // here we set up the negative and positive pin phase outputs
-const int positive_pin = 12;
+const int pulse_pin = 12;
 const int slaveSelectPin = 10;
 const int sensorPin = A0;
 
@@ -52,27 +52,20 @@ void setup() {
   pinMode(positive_pin, OUTPUT);
   
 }
-void positive_on() {
-  // turn on positive pin, off negative pin
-  digitalWrite(positive_pin, HIGH);
+void pulse_on() {
+  // pulse the output pin
+  digitalWrite(pulse_pin, HIGH);
   delayMicroseconds(pulse_width_us);
 }
 
   // here we check to see which pin is producing an output, then we switch the pins.
   
-void negative_on() {
+void pulse_off() {
   
-  digitalWrite(positive_pin, LOW);
-  delayMicroseconds(trough_width_us);
+  digitalWrite(pulse_pin, LOW);
+  delayMicroseconds(isi_ms*1000-pulse_width_us);
 }
   
-void turn_both_off() {
-  //digitalWrite(positive_pin, LOW);
-  //digitalWrite(negative_pin, LOW);
-  // delays the amount of time for the remainder of the desired frequency
-  delay(isi_ms-trough_width_us/1000-pulse_width_us/1000);
-}
-
 void digitalPotWrite(int address, int value) {
   // take the SS pin low to select the chip:
   digitalWrite(slaveSelectPin,LOW);
@@ -92,8 +85,7 @@ void checkInput() {
 void loop() {
   
   positive_on();
-  negative_on();
-  turn_both_off();
+  positive_off();
   
    //the below is just sample code of how to write a value to the digiPot
   checkInput();
